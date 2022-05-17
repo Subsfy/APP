@@ -20,7 +20,12 @@
     "ios": {
       "bundleIdentifier": "com.subsfy",
       "buildNumber": "1.0.0",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": true
+        }
+      }
     },
     "android": {
       "package": "com.subsfy",
