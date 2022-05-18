@@ -10,10 +10,7 @@ import mainLogoImg from '../../../assets/mainlogo-subsfy.png';
 const axios = require('axios');
 
 export function Login() {
-
- 
-
-  const [accessToken, setAccessToken] = useState<string | undefined>();
+  const [accessToken, setAccessToken] = useState<string | undefined | null>(null);
   const [userInfo, setUserInfo] = useState();
 
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -57,7 +54,7 @@ export function Login() {
       >
         <Image source={mainLogoImg}
         />
-        <Button title="Google" onPress={() => { promptAsync({ showTitle: true, showInRecents: true }) }}></Button>
+        <GoogleButton onPress={() => { promptAsync({ showTitle: true, showInRecents: true }) }}></GoogleButton>
       </LinearGradient>
     </Container>
   );
