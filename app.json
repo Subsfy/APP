@@ -20,12 +20,7 @@
     "ios": {
       "bundleIdentifier": "com.subsfy",
       "buildNumber": "1.0.0",
-      "supportsTablet": true,
-      "config": {
-        "googleSignIn": {
-          "reservedClientId": true
-        }
-      }
+      "supportsTablet": true
     },
     "android": {
       "package": "com.subsfy",
@@ -37,7 +32,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "plugins": ["@react-native-google-signin/google-signin"]
+    }
   }
 }
