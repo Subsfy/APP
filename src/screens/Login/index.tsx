@@ -25,29 +25,29 @@ export function Login() {
 
   useEffect(() => {
     if (response?.type === 'success') {
-      console.log(response.authentication?.accessToken)
       setAccessToken(response.authentication?.accessToken);
-      getUserData();
     }
   }, [response]);
 
-  async function getUserData() {
-    try {
-      const userInfoResponse = await axios.get("https://www.googleapis.com/userinfo/v2/me", {
-        headers: { 'Authorization':`Bearer ${accessToken}`, 'content-type': 'application/json', 'accept': 'application/json' }
-      });
-
-      console.log(userInfoResponse.data)
-
-      const data = userInfoResponse.data
-
-      setUserInfo(data);
-      console.log(data);
-
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  useEffect(() => {
+    (async () => {
+      try {
+        console.log('accessToken')
+        console.log(accessToken)
+        const userInfoResponse = await axios.get("https://www.googleapis.com/userinfo/v2/me", {
+          headers: { 'Authorization':`Bearer ${accessToken}`, 'content-type': 'application/json', 'accept': 'application/json' }
+        });
+  
+        console.log(userInfoResponse.data)
+  
+        const data = userInfoResponse.data
+        setUserInfo(data);
+  
+      } catch (error) {
+        console.log(error)
+      }
+    })()
+  }, [accessToken]);
 
   return (
     <Container data-testID='Container'>
@@ -57,7 +57,7 @@ export function Login() {
       >
         <Image source={mainLogoImg}
         />
-        <Button title="Google" onPress={() => { promptAsync({ showInRecents: true }) }}></Button>
+        <Button title="Google" onPress={() => { promptAsync({ showTitle: true, showInRecents: true }) }}></Button>
       </LinearGradient>
     </Container>
   );
