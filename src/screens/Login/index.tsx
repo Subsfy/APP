@@ -6,8 +6,9 @@ import * as Google from 'expo-auth-session/providers/google';
 import { GoogleButton } from '../../components/GoogleButton';
 import mainLogoImg from '../../../assets/mainlogo-subsfy.png';
 import { api } from '../../services/api';
+import { LoginDTO } from './models/LoginDTO';
 
-export function Login() {
+export function Login({ navigation }: LoginDTO) {
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     expoClientId: '305614900935-hpi9o3gc93vtue16sm4ff8u783tmps4p.apps.googleusercontent.com',
     iosClientId: '305614900935-mvm7j4fta5d684ng4editif8nijp3mb6.apps.googleusercontent.com',
@@ -19,7 +20,8 @@ export function Login() {
     (async () => {
       if (response?.type === 'success') {
         const result = await api.post('/auth/login', { token: response?.params?.id_token })
-        console.log(result.data)
+        const { data } = result.data
+        navigation.navigate('Home', data)
       }
     })()
   }, [response]);
