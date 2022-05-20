@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
-import { Button, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Container, styles } from './styles';
 import * as Google from 'expo-auth-session/providers/google';
 import { GoogleButton } from '../../components/GoogleButton';
-
 import mainLogoImg from '../../../assets/mainlogo-subsfy.png';
 import { api } from '../../services/api';
 
@@ -26,15 +25,19 @@ export function Login() {
   }, [response]);
 
   return (
-    <Container data-testID='Container'>
-      <LinearGradient
-        colors={['#09090a', '#cf09af']}
-        style={styles.background}
-      >
-        <Image source={mainLogoImg}
-        />
-        <Button title="Google" onPress={() => { promptAsync({ showTitle: true, showInRecents: true }) }}></Button>
-      </LinearGradient>
-    </Container>
+    <View style={
+      { flex: 1 }
+    }>
+      <Container data-testID='Container'>
+        <LinearGradient
+          colors={['#09090a', '#cf09af']}
+          style={styles.background}
+        >
+          <Image source={mainLogoImg}
+          />
+          <GoogleButton onPress={() => { promptAsync({ showTitle: true, showInRecents: true }) }}></GoogleButton>
+        </LinearGradient>
+      </Container>
+    </View>
   );
 }
