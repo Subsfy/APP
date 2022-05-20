@@ -1,11 +1,12 @@
 import React from 'react';
+import { useRoute } from '@react-navigation/native';
+
+import { IHomeProps } from '../../dtos/IHomeDTO';
 import { Header, LeftHeader, RightHeader, ScrollView, UserText, NotificationIcon, UserPhoto } from './styles';
-import { HomeDTO } from './models/HomeDTO';
-import PhotoTest from '../../../assets/PhotoTest2.png';
 
-export function Home(params: { route: { params: { avatar: any; name: string; }; }; }, { navigation }: HomeDTO) {
-  const { avatar, name } = params.route.params
-
+export function Home() {
+  const { params } = useRoute()
+  const { name, avatar } = params as IHomeProps
   return (
     <>
       <Header>
@@ -14,7 +15,7 @@ export function Home(params: { route: { params: { avatar: any; name: string; }; 
         </LeftHeader>
         <RightHeader>
           <NotificationIcon name="bell-badge-outline" size={40}></NotificationIcon>
-          <UserPhoto source={avatar} />
+          <UserPhoto source={{ uri: avatar }} />
         </RightHeader>
       </Header>
       <ScrollView></ScrollView>
