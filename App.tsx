@@ -1,9 +1,9 @@
 import AppLoading from 'expo-app-loading';
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { View } from 'react-native';
-import { Login } from './src/screens/Login';
+import { NativeBaseProvider } from 'native-base';
 import { useFonts, Inter_500Medium } from '@expo-google-fonts/inter';
+
+import { Routes } from './src/routes';
 
 export default function App() {
 
@@ -16,15 +16,8 @@ export default function App() {
   }
 
   return (
-    <View style={
-      { flex: 1}
-    }>
-      <Login/>
-      <StatusBar 
-      style='light' 
-      backgroundColor='transparent'
-      translucent
-      />
-    </View>
+    <NativeBaseProvider>
+      <Routes />
+    </NativeBaseProvider>
   );
 }
