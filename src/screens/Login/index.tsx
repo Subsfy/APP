@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Google from 'expo-auth-session/providers/google';
 import { useNavigation } from '@react-navigation/native';
@@ -22,7 +22,7 @@ export function Login() {
   useEffect(() => {
     (async () => {
       if (response?.type === 'success') {
-        const result = await api.post('/auth/login', { token: response?.params?.id_token })
+        const result = await api.post('/auth/login', { token: response?.params?.id_token, deviceType: Platform.OS })
         const { name, avatar } = result.data.data
         navigation.navigate('Home', { name, avatar })
       }
