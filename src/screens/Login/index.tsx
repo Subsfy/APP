@@ -1,5 +1,6 @@
+import React, { useEffect } from 'react';
+import { View, Platform } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Google from 'expo-auth-session/providers/google';
 import { useNavigation } from '@react-navigation/native';
@@ -26,10 +27,10 @@ export function Login() {
     (async () => {
       if (response?.type === 'success') {
         setIsAuthenticated(true);
-        const result = await api.post('/auth/login', { token: response?.params?.id_token })
-        const { name, avatar } = result.data.data
+        const result = await api.post('/auth/login', { token: response?.params?.id_token, deviceType: Platform.OS });
+        const { name, avatar } = result.data.data;
         setIsAuthenticated(false);
-        navigation.navigate('Home', { name, avatar })
+        navigation.navigate('Home', { name, avatar });
       }
     })()
   }, [response]);
