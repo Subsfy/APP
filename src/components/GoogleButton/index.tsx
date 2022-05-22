@@ -1,18 +1,18 @@
 import React from 'react';
-import { TouchableOpacity, Image } from 'react-native';
-import { Text, Container } from './styles';
+import { Text, Container, Image, Button } from './styles';
 
 interface googleButtonProps {
-    onPress: () => void
+    onPress: () => void,
+    disabled: boolean
 }
 
-export function GoogleButton({onPress}: googleButtonProps) {
+export function GoogleButton({ onPress, disabled }: googleButtonProps) {
     return (
-        <TouchableOpacity onPress={onPress}>
+        <Button onPress={onPress} disabled={disabled}>
             <Container>
-                <Image source={require('../../../assets/google-icon.png')} />
-                <Text>Sign up with Google</Text>
+                <Image style={disabled ? { opacity: 0.4 } : { opacity: 1 }} source={require('../../../assets/google-icon.png')} />
+                <Text style={disabled ? { opacity: 0.4 } : { opacity: 1 }}>Sign up with Google</Text>
             </Container>
-        </TouchableOpacity>
+        </Button>
     );
 }

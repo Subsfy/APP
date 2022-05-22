@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { View, Platform } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -48,7 +47,7 @@ export function Login() {
         >
           <Image source={mainLogoImg}
           />
-          {!isAuthenticated &&<GoogleButton onPress={() => { promptAsync({ showTitle: true, showInRecents: true }) }}></GoogleButton>}
+          <GoogleButton disabled={isAuthenticated} onPress={() => { promptAsync({ showTitle: true, showInRecents: true }) }}></GoogleButton>
         </LinearGradient>
         {isAuthenticated && <Loading />}
       </Container>
