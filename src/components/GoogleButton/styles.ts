@@ -7,13 +7,13 @@ export const Text = styled.Text`
     font-family: 'Inter_500Medium';
 `
 export const Container = styled.View`
-    width: 212px;
-    height: 39px;
+    width: 230px;
+    height: 50;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     padding-right: 10px;
-    background-color: rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 0, 0, 0.35);
     border-radius: 8px;
-    margin-top: 350px;
+    margin-top: 300px;
 `

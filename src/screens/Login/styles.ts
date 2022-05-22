@@ -9,8 +9,7 @@ export const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: 900,
-    paddingBottom: 250
+    height: '100%',
   }
 });
 
@@ -18,4 +17,8 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+`
+
+export const Image = styled.Image`
+
 `
