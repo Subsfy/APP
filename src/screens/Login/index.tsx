@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Google from 'expo-auth-session/providers/google';
@@ -8,9 +8,12 @@ import mainLogoImg from '../../../assets/mainlogo-subsfy.png';
 import { Container, Image, styles } from './styles';
 import { EXPO_CLIENT_ID, IOS_CLIENT_ID, ANDROID_CLIENT_ID, WEB_CLIENT_ID, API_URL } from "react-native-dotenv";
 import { api } from '../../services/api';
+import { Loading } from '../../components/Loading';
+
 
 export function Login() {
   const navigation = useNavigation()
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     expoClientId: EXPO_CLIENT_ID,
@@ -22,8 +25,10 @@ export function Login() {
   useEffect(() => {
     (async () => {
       if (response?.type === 'success') {
+        setIsAuthenticated(true);
         const result = await api.post('/auth/login', { token: response?.params?.id_token })
         const { name, avatar } = result.data.data
+        setIsAuthenticated(false);
         navigation.navigate('Home', { name, avatar })
       }
     })()
@@ -31,8 +36,9 @@ export function Login() {
 
   return (
     <View style={
-      { flex: 1,
-       }
+      {
+        flex: 1,
+      }
     }>
       <Container data-testID='Container'>
         <LinearGradient
@@ -41,8 +47,9 @@ export function Login() {
         >
           <Image source={mainLogoImg}
           />
-          <GoogleButton onPress={() => { promptAsync({ showTitle: true, showInRecents: true }) }}></GoogleButton>
+          {!isAuthenticated &&<GoogleButton onPress={() => { promptAsync({ showTitle: true, showInRecents: true }) }}></GoogleButton>}
         </LinearGradient>
+        {isAuthenticated && <Loading />}
       </Container>
     </View>
   );
