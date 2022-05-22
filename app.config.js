@@ -4,10 +4,10 @@ export default {
     slug: "Subsfy",
     version: "1.0.0",
     orientation: "portrait",
-    icon: "./assets/icon-subsfy.png",
+    icon: "./assets/icon.png",
     userInterfaceStyle: "light",
     splash: {
-      image: "./assets/splash-subsfy.png",
+      image: "./assets/splash.png",
       resizeMode: "contain",
       backgroundColor: "#ffffff"
     },
@@ -26,7 +26,7 @@ export default {
       package: "com.subsfy",
       versionCode: 1,
       adaptiveIcon: {
-        foregroundImage: "./assets/icon-subsfy.png",
+        foregroundImage: "./assets/adaptive-icon.png",
         backgroundColor: "#FFFFFF"
       }
     },

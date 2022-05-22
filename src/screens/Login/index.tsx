@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as Google from 'expo-auth-session/providers/google';
 import { useNavigation } from '@react-navigation/native';
 import { GoogleButton } from '../../components/GoogleButton';
 import mainLogoImg from '../../../assets/mainlogo-subsfy.png';
-import { Container, styles } from './styles';
+import { Container, Image, styles } from './styles';
 import { EXPO_CLIENT_ID, IOS_CLIENT_ID, ANDROID_CLIENT_ID, WEB_CLIENT_ID, API_URL } from "react-native-dotenv";
 import { api } from '../../services/api';
 
@@ -31,7 +31,8 @@ export function Login() {
 
   return (
     <View style={
-      { flex: 1 }
+      { flex: 1,
+       }
     }>
       <Container data-testID='Container'>
         <LinearGradient
