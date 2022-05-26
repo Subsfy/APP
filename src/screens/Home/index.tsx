@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/userSlice';
 
 export function Home() {
-  // Get user data from redux store
   const { user } = useSelector(selectUser)
 
   return (
