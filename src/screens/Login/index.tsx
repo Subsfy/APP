@@ -40,7 +40,6 @@ export function Login() {
           avatar: avatar 
         }
 
-        // Saves user data in redux store
         dispatch(login(user));
 
         navigation.navigate('Home');
