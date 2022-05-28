@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { View, Platform } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -10,17 +9,21 @@ import { Container, Image, styles } from './styles';
 import { EXPO_CLIENT_ID, IOS_CLIENT_ID, ANDROID_CLIENT_ID, WEB_CLIENT_ID, API_URL } from "react-native-dotenv";
 import { api } from '../../services/api';
 import { Loading } from '../../components/Loading';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/userSlice';
+import { AppDispatch } from '../../redux/store';
 
 
 export function Login() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const dispatch : AppDispatch = useDispatch();
 
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    expoClientId: EXPO_CLIENT_ID,
-    iosClientId: IOS_CLIENT_ID,
-    androidClientId: ANDROID_CLIENT_ID,
-    webClientId: WEB_CLIENT_ID,
+    expoClientId: EXPO_CLIENT_ID || '',
+    iosClientId: IOS_CLIENT_ID || '',
+    androidClientId: ANDROID_CLIENT_ID || '',
+    webClientId: WEB_CLIENT_ID || '',
   })
 
   useEffect(() => {
@@ -28,9 +31,18 @@ export function Login() {
       if (response?.type === 'success') {
         setIsAuthenticated(true);
         const result = await api.post('/auth/login', { token: response?.params?.id_token, deviceType: Platform.OS });
-        const { name, avatar } = result.data.data;
+        const { name, avatar, email } = result.data.data;
         setIsAuthenticated(false);
-        navigation.navigate('Home', { name, avatar });
+
+        const user = {
+          name: name,
+          email: email,
+          avatar: avatar 
+        }
+
+        dispatch(login(user));
+
+        navigation.navigate('Home');
       }
     })()
   }, [response]);
@@ -48,7 +60,7 @@ export function Login() {
         >
           <Image source={mainLogoImg}
           />
-          {!isAuthenticated &&<GoogleButton onPress={() => { promptAsync({ showTitle: true, showInRecents: true }) }}></GoogleButton>}
+          <GoogleButton disabled={isAuthenticated} onPress={() => { promptAsync({ showTitle: true, showInRecents: true }) }}></GoogleButton>
         </LinearGradient>
         {isAuthenticated && <Loading />}
       </Container>

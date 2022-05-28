@@ -17,3 +17,8 @@ export const Container = styled.View`
     border-radius: 8px;
     margin-top: 300px;
 `
+export const Image = styled.Image`
+`
+
+export const Button = styled.TouchableOpacity`
+`
