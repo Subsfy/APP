@@ -20,10 +20,10 @@ export function Login() {
   const dispatch : AppDispatch = useDispatch();
 
   const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
-    expoClientId: EXPO_CLIENT_ID,
-    iosClientId: IOS_CLIENT_ID,
-    androidClientId: ANDROID_CLIENT_ID,
-    webClientId: WEB_CLIENT_ID,
+    expoClientId: EXPO_CLIENT_ID || '',
+    iosClientId: IOS_CLIENT_ID || '',
+    androidClientId: ANDROID_CLIENT_ID || '',
+    webClientId: WEB_CLIENT_ID || '',
   })
 
   useEffect(() => {
