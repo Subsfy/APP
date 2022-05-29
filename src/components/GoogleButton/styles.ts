@@ -8,7 +8,7 @@ export const Text = styled.Text`
 `
 export const Container = styled.View`
     width: 230px;
-    height: 50;
+    height: 50px;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
