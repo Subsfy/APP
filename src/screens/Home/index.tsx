@@ -4,17 +4,17 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../../redux/userSlice';
 
 export function Home() {
-  const { user } = useSelector(selectUser)
+  const { userInfo } = useSelector(selectUser)
 
   return (
     <>
       <Header>
         <LeftHeader>
-          <UserText>Olá, {user.name}</UserText>
+          <UserText>Olá, {userInfo.name}</UserText>
         </LeftHeader>
         <RightHeader>
           <NotificationIcon name="bell-badge-outline" size={40}></NotificationIcon>
-          <UserPhoto source={{ uri: user.avatar }} />
+          <UserPhoto source={{ uri: userInfo.avatar }} />
         </RightHeader>
       </Header>
       <ScrollView></ScrollView>
